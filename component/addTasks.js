@@ -1,6 +1,7 @@
 import checkComplete from "./checkComplete.js"
 import deleteIcon from "./deleteIcon.js"
 import displayTasks from "./readTasks.js"
+import { getLocalEmpty, setLocal } from "./localStorage.js"
 
 const __Create = (el, addClass = '') => {
    const newEl = document.createElement(el)
@@ -25,15 +26,11 @@ export const addTask = __Event => {
    list.innerHTML = ''
    // Manipular datos inputs
    const complete = false;
-   const taskObj = {
-      value, 
-      dateFormat,
-      complete,
-      id: uuid.v4()
-   }
-   const tasksList = JSON.parse(localStorage.getItem("tasks")) || []
+   const taskObj = { value, dateFormat, complete, id: uuid.v4() }
+
+   const tasksList = getLocalEmpty("tasks")
    tasksList.push(taskObj)
-   localStorage.setItem("tasks", JSON.stringify(tasksList))
+   setLocal("tasks", tasksList)
    //
    displayTasks()
    

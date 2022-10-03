@@ -1,3 +1,5 @@
+import { getLocal, setLocal } from "./localStorage.js"
+
 const checkComplete = (id) => {
    const i = document.createElement("i")
    i.className = "far fa-check-square icon"
@@ -9,10 +11,10 @@ const completeTask = (evento, id) => {
    element.classList.toggle('fas')
    element.classList.toggle('completeIcon')
    element.classList.toggle('far')
-   const tasks = JSON.parse(localStorage.getItem("tasks"))
+   const tasks = getLocal("tasks")
    const index = tasks.findIndex(item => item.id === id)
    tasks[index]["complete"] = !tasks[index]["complete"]
-   localStorage.setItem("tasks", JSON.stringify(tasks))
+   setLocal("tasks", tasks)
 }
 
 export default checkComplete

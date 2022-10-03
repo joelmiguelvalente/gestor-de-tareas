@@ -1,10 +1,11 @@
 import { createTask } from "./addTasks.js"
 import { uniqueDates, orderDates } from "../services/dates.js"
 import dateElement from "./dateElement.js"
+import { getLocalEmpty, setLocal } from "./localStorage.js"
 
 export const displayTasks = () => {
    const list = document.querySelector("[data-list]")
-   const tasksList = JSON.parse(localStorage.getItem("tasks")) || []
+   const tasksList = getLocalEmpty("tasks")
    const dates = uniqueDates(tasksList)
    orderDates(dates)
    dates.forEach(date => {

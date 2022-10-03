@@ -1,4 +1,5 @@
 import displayTasks from "./readTasks.js"
+import { getLocal, setLocal } from "./localStorage.js"
 
 const deleteIcon = (id) => {
    const i = document.createElement("i")
@@ -7,10 +8,10 @@ const deleteIcon = (id) => {
    return i
 }
 const deleteTask = id => {
-   const tasks = JSON.parse(localStorage.getItem("tasks"))
+   const tasks = getLocal("tasks")
    const index = tasks.findIndex(item => item.id === id)
    tasks.splice(index, 1)
-   localStorage.setItem("tasks", JSON.stringify(tasks))
+   setLocal("tasks", tasks)
    document.querySelector("[data-list]").innerHTML = ''
    displayTasks()
 }
